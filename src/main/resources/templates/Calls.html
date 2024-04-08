@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calls</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/Calls.css}">
+</head>
+<body>
+  <nav class="nav">
+    <ul>
+        <a th:href="@{/}" th:text="#{home}" th:class="${'nav-item is-active'}">Home</a>
+        <a th:href="@{/messages}" th:text="#{Messages}" th:class="${'nav-item'}">Messages</a>
+        <a th:href="@{/calls}" th:text="#{Calls}" th:class="${'nav-item'}">Calls</a>
+        <a th:href="@{/documents}" th:text="#{Documents}" th:class="${'nav-item'}">Documents</a>
+        <span th:class="nav-indicator"></span>
+    </ul>
+</nav>    
+      <div id="remote-media-div"></div>
+      <script th:src="@{https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/twilio-video.min.js}"></script>
+  <script th:src="@{/js/Calls.js}"></script>
+</body>
+</html>
