@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+WebSync - Real-time Collaborative Code Editor
+WebSync is a real-time collaborative code editing application with an integrated chat system. It allows multiple users to simultaneously edit code and communicate through a chat interface.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features:
+Real-time collaborative code editing using Monaco Editor
+Live chat functionality
+Multiple user support
+Syntax highlighting for JavaScript
+Real-time code synchronization between users
 
-## Available Scripts
+Prerequisites
+Before you begin, ensure you have the following installed:
 
-In the project directory, you can run:
+Java JDK 8 or higher
+Node.js 14 or higher
+Maven
+npm (comes with Node.js)
 
-### `npm start`
+Project Structure
+websync/
+├── websync-backend/    # Spring Boot backend
+└── websync-frontend/   # React frontend make sure to create front-end folder and add the files into there
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Installation and Setup
+1. Clone the Repository
+cd websync
+2. Backend Setup
+cd websync-backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Install Maven dependencies and start the server
+mvn spring-boot:run
+The backend server will start on http://localhost:8080
+3. Frontend Setup
+Open a new terminal and:
+cd websync-frontend
 
-### `npm test`
+# Install dependencies
+npm install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Start the development server
+npm start
+The frontend application will start on http://localhost:3000
 
-### `npm run build`
+Usage:
+Open http://localhost:3000 in your browser
+Enter a username to join
+Start coding in the editor
+Use the chat panel to communicate with other users
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Development
+Backend (Spring Boot)
+The backend is built with:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Spring Boot 2.7.0
+WebSocket support
+JPA
+Lombok
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Key components:
 
-### `npm run eject`
+WebSocketConfig.java: WebSocket configuration
+ChatController.java: Message handling
+Message.java: Data model
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Frontend (React)
+The frontend uses:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+React 18
+Monaco Editor
+SockJS
+STOMP.js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Key components:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+App.js: Main application component
+CodeEditor.js: Monaco editor integration
+Chat.js: Chat functionality
 
-## Learn More
+Troubleshooting
+Common Issues
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Port Conflicts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Backend port 8080 already in use:
+bashCopy# Change port in application.properties
+server.port=8081
 
-### Code Splitting
+Frontend port 3000 in use:
+bashCopy# React will automatically suggest an alternative port
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+WebSocket Connection Failed
 
-### Making a Progressive Web App
+Verify backend is running
+Check CORS configuration in WebSocketConfig.java
+Ensure frontend WebSocket URL matches backend port
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
+Dependencies Issues
+bashCopy# Clean and rebuild backend
+mvn clean install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+# Clean and reinstall frontend dependencies
+rm -rf node_modules
+npm install
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Running in Production
+Backend
+bashCopy# Create JAR file
+mvn clean package
 
-### `npm run build` fails to minify
+# Run JAR file
+java -jar target/websync-backend-1.0-SNAPSHOT.jar
+Frontend
+bashCopy# Create production build
+npm run build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Serve using a static server
+npx serve -s build
